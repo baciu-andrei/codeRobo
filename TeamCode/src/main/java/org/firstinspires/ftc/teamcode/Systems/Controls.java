@@ -21,5 +21,5 @@ public class Controls {
     public SpeedMode getSpeedMode(){return currentSpeed;}
     public double getForward(){return -gamepad1.gamepad.left_stick_y;}
     public double getStrafe(){return gamepad1.gamepad.left_stick_x;}
-    public double getTurn(){return (gamepad1.gamepad.right_trigger - gamepad1.gamepad.left_trigger);}
+    public double getTurn(){return (-gamepad1.gamepad.right_trigger + gamepad1.gamepad.left_trigger);}
 }

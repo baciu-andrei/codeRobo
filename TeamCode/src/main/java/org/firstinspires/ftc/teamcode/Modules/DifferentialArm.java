@@ -1,16 +1,21 @@
 package org.firstinspires.ftc.teamcode.Modules;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Utils.HardwareConfig;
 import org.firstinspires.ftc.teamcode.Utils.PIDController;
 
+@Config
 public class DifferentialArm {
+    public static boolean disabled=true;
+    public static boolean isMotionFinnishedConfig=true;
     public static double s1Offset=0,s2Offset=0;
-    private static double targetArm=21.3,targetPivot=0;
-    private static PIDController armPID=new PIDController(0.01,0,0.0005);
-    private static PIDController pivotPID=new PIDController(0.01,0,0.0005);
+    public static double targetArm=21.3,targetPivot=0;
+    public static PIDController armPID=new PIDController(0.01,0,0.0005);
+    public static PIDController pivotPID=new PIDController(0.01,0,0.0005);
     private static ElapsedTime timer=new ElapsedTime();
     public static void setAngles(double arm,double pivot){
+        if(disabled){return;}
         targetArm=arm;
         targetPivot=pivot;
         armPID.setTarget(arm);
@@ -30,6 +35,7 @@ public class DifferentialArm {
         return pivot;
     }
     public static void update(){
+        if(disabled){return;}
         double currentArm=getCurrentArmAngle();
         double currentPivot=getCurrentPivotAngle();
         double armPower=armPID.update(currentArm);
@@ -42,6 +48,7 @@ public class DifferentialArm {
         HardwareConfig.rightArmServo.setAngle(servoRightAngle);
     }
     public static boolean motionCompleted(){
+        if(disabled){return isMotionFinnishedConfig;}
         return timer.seconds()>0.5 && Math.abs(getCurrentArmAngle()-targetArm)<5 && Math.abs(getCurrentPivotAngle()-targetPivot)<5;
     }//poate un fel de motion profile?
     public static void setTargetAngles(double arm,double pivot){

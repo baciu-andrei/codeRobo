@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.Modules;
 
+import com.acmerobotics.dashboard.config.Config;
+
 import org.firstinspires.ftc.teamcode.Utils.HardwareConfig;
 
+@Config
 public class PTO {
     public static double ENGAGED_ANGLE=232,DISENGAGED_ANGLE=180;
     public static void engage(){HardwareConfig.ptoServo.setAngle(ENGAGED_ANGLE);}

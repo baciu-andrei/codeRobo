@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Systems;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.Modules.Elevator;
 import org.firstinspires.ftc.teamcode.Modules.Extendo;
 import org.firstinspires.ftc.teamcode.Utils.HardwareConfig;
 
+@Config
 public class OuttakeFSM {
     public enum State {
         INTAKING,WAITING_FOR_CLAW_CLOSE,TRAVEL,HUMAN,WALL,HIGH_BASKET,LOW_BASKET,HIGH_CHAMBER,LOW_CHAMBER,WAITING_AFTER_CLAW_OPEN
@@ -41,12 +43,13 @@ public class OuttakeFSM {
             case WAITING_FOR_CLAW_CLOSE:
                 if(stateTimer.seconds()>WAIT_CLAW_CLOSE_DELAY){
                     Claw.close();
-                    Elevator.setTargetPosition(SafeElevatorLevel);
-                    DifferentialArm.setTargetAngles(TransferArm, TransferPivot);
                     setState(State.TRAVEL);
                 }
                 break;
             case TRAVEL:
+                Claw.close();
+                Elevator.setTargetPosition(SafeElevatorLevel);
+                DifferentialArm.setTargetAngles(TransferArm, TransferPivot);
                 break;
             case HUMAN:
                 Elevator.setTargetPosition(0);

@@ -21,10 +21,10 @@ public class Drivetrain {
         mfr=HardwareConfig.rightFrontMotor;
         mbl=HardwareConfig.leftRearMotor;
         mbr=HardwareConfig.rightRearMotor;
-        mfl.setDirection(DcMotorSimple.Direction.REVERSE);
-        mfr.setDirection(DcMotorSimple.Direction.FORWARD);
-        mbl.setDirection(DcMotorSimple.Direction.REVERSE);
-        mbr.setDirection(DcMotorSimple.Direction.FORWARD);
+        mfl.setDirection(DcMotorSimple.Direction.FORWARD);
+        mfr.setDirection(DcMotorSimple.Direction.REVERSE);
+        mbl.setDirection(DcMotorSimple.Direction.FORWARD);
+        mbr.setDirection(DcMotorSimple.Direction.REVERSE);
         ArrayList<DcMotorEx> motors=new ArrayList<>();
         motors.add(mfl);motors.add(mfr);motors.add(mbl);motors.add(mbr);
         for(DcMotorEx motor: motors){

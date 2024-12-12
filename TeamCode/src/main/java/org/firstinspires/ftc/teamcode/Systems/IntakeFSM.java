@@ -1,8 +1,11 @@
 package org.firstinspires.ftc.teamcode.Systems;
 
+import com.acmerobotics.dashboard.config.Config;
+
 import org.firstinspires.ftc.teamcode.Modules.DropDown;
 import org.firstinspires.ftc.teamcode.Modules.Sweeper;
 
+@Config
 public class IntakeFSM {
     public enum State {
         IDLE,INTAKING,FULL

@@ -1,15 +1,20 @@
 package org.firstinspires.ftc.teamcode.Modules;
 
+import com.acmerobotics.dashboard.config.Config;
+
 import org.firstinspires.ftc.teamcode.Utils.HardwareConfig;
 import org.firstinspires.ftc.teamcode.Utils.PIDController;
 
+@Config
 public class Extendo {
     public static PIDController pid = new PIDController(0.01,0,0.00045);
     public static int MaxExtendoExtension = 1300;
-    private static double targetPosition = 0;
-    private static boolean disabled = false;
+    public static double targetPosition = 0;
+    public static boolean disabled = true;
+    public static boolean atTargetConfig = false;
 
     public static void setTargetPosition(double pos){
+        if(disabled){return;}
         if(pos > MaxExtendoExtension) pos = MaxExtendoExtension;
         if(pos < 0) pos = 0;
         targetPosition = pos;
@@ -25,6 +30,7 @@ public class Extendo {
     }
 
     public static boolean atTarget(){
+        if (disabled){return atTargetConfig;}
         return Math.abs(currentPosition()-targetPosition)<5;
     }
 
